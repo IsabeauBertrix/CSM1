@@ -32,4 +32,11 @@ def sol_affine(t,y0):
 
 def sol_affine2(t,y0):
     
-    return 1
+    if y < -1 :
+        return 1
+    if -1 < y < 1 :
+        return (np.exp( 2 * t ) - 1 ) / ( np.exp( 2 * t ) + 1 )
+    if 1 < y :
+        return 1
+    
+
