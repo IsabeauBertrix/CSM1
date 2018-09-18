@@ -9,6 +9,7 @@ import numpy as np
 
 a = -1.
 b = 1.
+c = 2
 
 def f_affine(t,y):
     """Fonction affine pour y' = ay+b. Les coefficients a et b sont des
@@ -16,6 +17,10 @@ def f_affine(t,y):
 
     """
     return a*y+b
+
+def f_affine2(t,y):
+    return a * y^c + b
+
 def sol_affine(t,y0):
     """Pour une fonction affine, on connait la solution exacte. C'est
     y(t0+s) = y0*exp(a*s) - b*(1-exp(a*s))/a, soit y(t) =
@@ -24,3 +29,7 @@ def sol_affine(t,y0):
     """
     t0 = t[0]
     return y0*np.exp(a*(t-t0)) - b * (1.-np.exp(a*(t-t0)))/a
+
+def sol_affine2(t,y0):
+    
+    return 1
