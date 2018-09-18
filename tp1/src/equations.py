@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import numpy as np
+import math
 
 # Fonction f(t,y), second membre d'équations différentielles d'ordre 1
 # écrite sous la forme d'un problème de Cauchy, y'(t) = f(t,y(t)) avec
@@ -19,7 +20,7 @@ def f_affine(t,y):
     return a*y+b
 
 def f_affine2(t,y):
-    return a * y^c + b
+    return a * math.pow( y , c ) + b
 
 def sol_affine(t,y0):
     """Pour une fonction affine, on connait la solution exacte. C'est
@@ -32,11 +33,14 @@ def sol_affine(t,y0):
 
 def sol_affine2(t,y0):
     
-    if y < -1 :
-        return 1
-    if -1 < y < 1 :
-        return (np.exp( 2 * t ) - 1 ) / ( np.exp( 2 * t ) + 1 )
-    if 1 < y :
-        return 1
+    if y0 < -1 :
+        k =  - 2 * t + np.log(( -y0 - 1 ) / ( 1 - y0 ))
+        return (np.exp( 2 * t + k ) + 1 ) / ( np.exp( 2 * t + k ) - 1 )
+    if -1 < y0 < 1 :
+        k =  - 2 * t + np.log(( 1 + y0 ) / ( 1 - y0 ))
+        return (np.exp( 2 * t + k ) - 1 ) / ( np.exp( 2 * t + k ) + 1 )
+    if 1 < y0 :
+        k = -  2 * t + np.log(( 1 + y0 ) / ( y0 - 1 ))
+        return ( -1 - np.exp( 2 * t + k) ) / ( 1 - np.exp( 2 * t +k ) )
     
 
